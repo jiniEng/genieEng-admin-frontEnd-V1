@@ -1,7 +1,40 @@
 import styled from "@emotion/styled";
 import { NextPage } from "next";
+import { ChangeEvent, useState } from "react";
+import { loginDataType } from "../utils/interface/login";
 
 const Login: NextPage = () => {
+  const [loginData, setLoginData] = useState<loginDataType>({
+    id: "",
+    pw: "",
+  });
+
+  const loginDataFormat = (name: "id" | "pw", value: string): string => {
+    let newData = "";
+
+    if (name === "id") {
+      newData = value.replace(/\W/, "");
+    } else if (name === "pw") {
+      newData = value.replace(/[^\w!@#$%.?\-_*]/, "");
+    }
+
+    return newData;
+  };
+
+  const changeLoginData = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name !== "id" && e.target.name !== "pw") {
+      throw new Error('Unknown "name" value');
+    }
+
+    const { name, value } = e.target;
+
+    const newValue = loginDataFormat(name, value);
+
+    setLoginData((pre) => ({ ...pre, [name]: newValue }));
+  };
+
+  const onSignIn = () => {};
+
   return (
     <LoginPage>
       <LoginContanier>
@@ -10,13 +43,22 @@ const Login: NextPage = () => {
           <Title>로그인</Title>
           <InputWrap>
             <Label>아이디</Label>
-            <LoginInput />
+            <LoginInput
+              name="id"
+              value={loginData.id}
+              onChange={changeLoginData}
+            />
           </InputWrap>
           <InputWrap>
             <Label>비밀번호</Label>
-            <LoginInput type="password" />
+            <LoginInput
+              name="pw"
+              value={loginData.pw}
+              onChange={changeLoginData}
+              type="password"
+            />
           </InputWrap>
-          <SignIn>로그인</SignIn>
+          <SignIn onClick={onSignIn}>로그인</SignIn>
         </LoginSection>
       </LoginContanier>
     </LoginPage>
