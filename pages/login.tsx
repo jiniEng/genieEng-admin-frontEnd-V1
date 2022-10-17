@@ -8,6 +8,9 @@ const Login: NextPage = () => {
     id: "",
     pw: "",
   });
+  const [pwMode, setPwMode] = useState<boolean>(true);
+
+  const changePwMode = () => setPwMode(!pwMode);
 
   const loginDataFormat = (name: "id" | "pw", value: string): string => {
     let newData = "";
@@ -43,20 +46,25 @@ const Login: NextPage = () => {
           <Title>로그인</Title>
           <InputWrap>
             <Label>아이디</Label>
-            <LoginInput
-              name="id"
-              value={loginData.id}
-              onChange={changeLoginData}
-            />
+            <LoginInputWrap>
+              <IdInput
+                name="id"
+                value={loginData.id}
+                onChange={changeLoginData}
+              />
+            </LoginInputWrap>
           </InputWrap>
           <InputWrap>
             <Label>비밀번호</Label>
-            <LoginInput
-              name="pw"
-              value={loginData.pw}
-              onChange={changeLoginData}
-              type="password"
-            />
+            <LoginInputWrap>
+              <PwInput
+                name="pw"
+                value={loginData.pw}
+                onChange={changeLoginData}
+                type={pwMode ? "password" : "text"}
+              />
+              <PwModeBtn pwMode={pwMode} onClick={changePwMode} />
+            </LoginInputWrap>
           </InputWrap>
           <SignIn onClick={onSignIn}>로그인</SignIn>
         </LoginSection>
@@ -101,15 +109,54 @@ const Label = styled.p`
   font-size: 18px;
 `;
 
-const LoginInput = styled.input`
+const LoginInputWrap = styled.div`
   border: 1px #000 solid;
   border-radius: 3px;
   width: 350px;
   height: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const IdInput = styled.input`
   outline: none;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
 
   font-size: 16px;
   padding: 0 7px;
+`;
+
+const PwInput = styled(IdInput)`
+  width: 318px;
+`;
+
+const pwImgChange = ({ pwMode }: { pwMode: boolean }) =>
+  pwMode
+    ? `
+    background-image: url("/img/login/pwMode.svg");
+    background-size: 25px 18px;
+    `
+    : `
+    background-image: url("/img/login/textMode.svg");
+    background-size: 21.6px 16px;
+    `;
+
+const PwModeBtn = styled.button`
+  cursor: pointer;
+  width: 27px;
+  height: 18px;
+  border: 0;
+  padding: 0;
+  margin-right: 5px;
+
+  background-color: transparent;
+  ${pwImgChange};
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 const LoginSection = styled.section`
