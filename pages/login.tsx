@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { NextPage } from "next";
 import { ChangeEvent, useState } from "react";
-import { loginDataType } from "../utils/interface/login";
+import { loginDataType } from "utils/interface/login";
 
 const Login: NextPage = () => {
   const [loginData, setLoginData] = useState<loginDataType>({
