@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
-import MainHeader from "../components/common/header/mainHeader";
+import Header from "components/common/header/header";
 
 const Home: NextPage = () => {
   return (
     <div>
-      <MainHeader />
+      <Header />
     </div>
   );
 };
