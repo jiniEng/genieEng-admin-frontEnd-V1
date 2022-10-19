@@ -38,7 +38,7 @@ const CommunityShortcut: NextPage = () => {
 };
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   height: fit-content;
 
   margin-top: 150px;
