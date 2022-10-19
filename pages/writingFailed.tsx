@@ -1,10 +1,10 @@
 import WritingRes from "components/writingRes/writingRes";
 import { NextPage } from "next";
 
-const WritingSuccess: NextPage = () => {
+const WritingFailed: NextPage = () => {
   const resPageData = {
-    title: "성공적으로 글이 등록되었습니다",
-    img: "/img/writingRes/success.svg",
+    title: "글 등록에 실패하였습니다",
+    img: "/img/writingRes/failed.svg",
   };
 
   return (
@@ -14,4 +14,4 @@ const WritingSuccess: NextPage = () => {
   );
 };
 
-export default WritingSuccess;
+export default WritingFailed;
