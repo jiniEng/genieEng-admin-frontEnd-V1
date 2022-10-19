@@ -66,7 +66,7 @@ const DescriptionWrap = styled.div`
 `;
 
 const BannerSection = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 580px;
   position: relative;
 `;
@@ -95,7 +95,7 @@ const PurpleBox = styled(Box)`
 `;
 
 const SkyBox = styled(Box)`
-  bottom: 0px;
+  bottom: 0;
   right: 0;
   width: 74vw;
   border-radius: 0 0 0 200px;
