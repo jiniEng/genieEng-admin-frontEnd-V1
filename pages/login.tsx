@@ -185,7 +185,7 @@ const LoginContanier = styled.article`
 `;
 
 const LoginImg = styled.div`
-  background-image: url(${"img/loginImg.svg"});
+  background-image: url(${"img/login/loginImg.svg"});
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
