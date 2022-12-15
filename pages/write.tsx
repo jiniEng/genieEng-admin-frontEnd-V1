@@ -39,10 +39,30 @@ const WritePost: NextPage<props> = ({ target }: props) => {
         <TitleSection />
         <ContentSection />
         <ImgSelectSection />
+        <WritePostBtn>다음으로</WritePostBtn>
       </WriteSection>
     </WritePage>
   );
 };
+
+const WritePostBtn = styled.button`
+  width: 450px;
+  height: 70px;
+  border-radius: 10px;
+  background-color: #6c63ff;
+  margin-top: 70px;
+
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: 200ms;
+
+  &:active {
+    transform: scale(0.99);
+  }
+`;
 
 const WriteSection = styled.article`
   width: 1000px;
