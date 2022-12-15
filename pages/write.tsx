@@ -7,10 +7,12 @@ import { getWriteTargetDocs } from "docs/writeTaget";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import {
   targetDocsType,
   targetNameListType,
 } from "utils/interface/writePost/writePost";
+import { writePostDataRecoil } from "utils/store/writePost/writePost";
 
 interface props {
   target: targetNameListType | null;
@@ -18,6 +20,7 @@ interface props {
 
 const WritePost: NextPage<props> = ({ target }: props) => {
   const router = useRouter();
+  const [writePostData, setWritePostData] = useRecoilState(writePostDataRecoil);
   const [categoryDocs, setCategoryDocs] = useState<targetDocsType>({
     categoryName: "",
     url: "",
@@ -32,6 +35,11 @@ const WritePost: NextPage<props> = ({ target }: props) => {
     }
   }, []);
 
+  const submit = () => {
+    console.log(writePostData);
+    setWritePostData({ title: "", content: "" });
+  };
+
   return (
     <WritePage>
       <WriteSection>
@@ -39,7 +47,7 @@ const WritePost: NextPage<props> = ({ target }: props) => {
         <TitleSection />
         <ContentSection />
         <ImgSelectSection />
-        <WritePostBtn>다음으로</WritePostBtn>
+        <WritePostBtn onClick={submit}>다음으로</WritePostBtn>
       </WriteSection>
     </WritePage>
   );

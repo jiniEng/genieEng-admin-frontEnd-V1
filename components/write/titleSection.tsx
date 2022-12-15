@@ -1,11 +1,22 @@
 import styled from "@emotion/styled";
+import { ChangeEvent } from "react";
+import { useRecoilState } from "recoil";
+import { writePostDataRecoil } from "utils/store/writePost/writePost";
 
 const TitleSection = () => {
+  const [writePostData, setWritePostData] = useRecoilState(writePostDataRecoil);
+
+  const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    setWritePostData((pre) => ({ ...pre, title: value }));
+  };
+
   return (
     <Section>
       <Label>제목</Label>
       <SubLabel>게시글의 제목을 작성해주세요.</SubLabel>
-      <TitleInput />
+      <TitleInput value={writePostData.title} onChange={changeTitle} />
     </Section>
   );
 };

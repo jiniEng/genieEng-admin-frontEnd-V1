@@ -10,3 +10,8 @@ export interface targetDocsMapType {
   middle: targetDocsType;
   notice: targetDocsType;
 }
+
+export interface writePostDataType {
+  title: string;
+  content: string;
+}

@@ -1,20 +1,28 @@
 import styled from "@emotion/styled";
 import { NextPage } from "next";
 import { ChangeEvent, useState } from "react";
+import { useRecoilState } from "recoil";
+import { writePostDataRecoil } from "utils/store/writePost/writePost";
 
 const ContentSection: NextPage = () => {
   const [height, setHeight] = useState<number>(300);
+  const [writePostData, setWritePostData] = useRecoilState(writePostDataRecoil);
 
   const changeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const { scrollHeight } = e.target;
+    const { scrollHeight, value } = e.target;
     setHeight(scrollHeight < 300 ? 300 : scrollHeight);
+    setWritePostData((pre) => ({ ...pre, content: value }));
   };
 
   return (
     <Section>
       <Label>내용 작성</Label>
       <SubLabel>게시글의 내용을 작성해주세요.</SubLabel>
-      <ContentInput onChange={changeContent} height={height} />
+      <ContentInput
+        onChange={changeContent}
+        value={writePostData.content}
+        height={height}
+      />
     </Section>
   );
 };
