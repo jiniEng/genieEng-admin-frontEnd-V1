@@ -1,13 +1,19 @@
 import styled from "@emotion/styled";
 import { NextPage } from "next";
 import { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { writePostDataRecoil } from "utils/store/writePost/writePost";
 
 const ImgSelectSection: NextPage = () => {
-  const [imgs, setImgs] = useState<FormData[]>([]);
   const [imgView, setImgView] = useState<string[]>([]);
+  const setWritePostData = useSetRecoilState(writePostDataRecoil);
 
   const onFileChange = async (e: any) => {
     const file = e.target.files[0];
+
+    const formData = new FormData();
+    formData.append("image", file);
+    setWritePostData((pre) => ({ ...pre, imgs: [...pre.imgs, formData] }));
 
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {

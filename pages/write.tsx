@@ -37,7 +37,7 @@ const WritePost: NextPage<props> = ({ target }: props) => {
 
   const submit = () => {
     console.log(writePostData);
-    setWritePostData({ title: "", content: "" });
+    setWritePostData({ title: "", content: "", imgs: [] });
   };
 
   return (

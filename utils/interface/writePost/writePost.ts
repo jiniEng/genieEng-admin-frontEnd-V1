@@ -14,4 +14,5 @@ export interface targetDocsMapType {
 export interface writePostDataType {
   title: string;
   content: string;
+  imgs: FormData[];
 }
